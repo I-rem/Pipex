@@ -74,15 +74,12 @@ Must be equivalent to :
 - No prohibited functions
 ## Mandatory part
 The command ./pipex file1 cmd1 cmd2 file2 must behave like this command: <file1 cmd1 | cmd2> file2
-Error and arguments management
+### Error and arguments management
 - The program takes 4 arguments, no more, no less (except for bonus part) and only in the right order.
 - Error management is correct: existing files, files rights, the binary of the command exists etc.
-If these points are respected, check 'Yes' and continue the evaluation.
-Otherwise, the evaluation is overuse Incomplete work or the appropriate flag.
-Yes
-The program
-The program does what is requested, without displaying any additional information/steps against the shell command
-Run your own tests et compare the results of shell exit and
-of shell output and that of the program.
-If you haven't any idea, look at the subject examples.
-If no error is detected, check 'Yes' and continue.
+
+### The program
+- The program does what is requested, without displaying any additional information/steps against the shell command
+- Run your own tests et compare the results of shell exit and of shell output and that of the program.
+- If you haven't any idea, look at the subject examples.
+- If no error is detected, check 'Yes' and continue.
