@@ -11,7 +11,8 @@ OBJS = pipex.o
 all: $(NAME)
 
 $(NAME):
-	$(CC) $(CFLAGS) -c $(SRCS) ar -rc $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) -c $(SRCS) 
+	ar -rc $(NAME) $(OBJS)
 
 clean:
 	rm -rf $(OBJS)
