@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <fcntl.h>
+#include <string.h>
+#include <errno.h>
 
 int main(int argc, char **argv) {
     if (argc != 5) {
@@ -14,6 +16,28 @@ int main(int argc, char **argv) {
     char *cmd1[] = { "/bin/sh", "-c", argv[2], NULL };
     char *cmd2[] = { "/bin/sh", "-c", argv[3], NULL };
     char *file2 = argv[4];
+
+    int input_fd = open(file1, O_RDONLY);
+    if (input_fd == -1) {
+        fprintf(stderr, "Error opening input file: %s\n", strerror(errno));
+        exit(EXIT_FAILURE);
+    }
+
+    int output_fd = open(file2, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (output_fd == -1) {
+        fprintf(stderr, "Error opening output file: %s\n", strerror(errno));
+        exit(EXIT_FAILURE);
+    }
+
+    if (access(cmd1[0], X_OK) == -1) {
+        fprintf(stderr, "Error executing command 1: %s\n", strerror(errno));
+        exit(EXIT_FAILURE);
+    }
+
+    if (access(cmd2[0], X_OK) == -1) {
+        fprintf(stderr, "Error executing command 2: %s\n", strerror(errno));
+        exit(EXIT_FAILURE);
+    }
 
     int pipefd[2];
     if (pipe(pipefd) == -1) {
@@ -28,7 +52,7 @@ int main(int argc, char **argv) {
     } else if (pid1 == 0) {
         // child 1
         close(pipefd[0]);
-        if (dup2(open(file1, O_RDONLY), STDIN_FILENO) == -1) {
+        if (dup2(input_fd, STDIN_FILENO) == -1) {
             perror("dup2");
             exit(EXIT_FAILURE);
         }
@@ -52,7 +76,7 @@ int main(int argc, char **argv) {
             perror("dup2");
             exit(EXIT_FAILURE);
         }
-        if (dup2(open(file2, O_WRONLY | O_CREAT | O_TRUNC, 0644), STDOUT_FILENO) == -1) {
+        if (dup2(output_fd, STDOUT_FILENO) == -1) {
             perror("dup2");
             exit(EXIT_FAILURE);
         }
@@ -61,7 +85,7 @@ int main(int argc, char **argv) {
         exit(EXIT_FAILURE);
     }
 
-    // parent
+     // parent
     close(pipefd[0]);
     close(pipefd[1]);
     waitpid(pid1, NULL, 0);
