@@ -73,7 +73,7 @@ void	check_child(int flag, int *pipefd,	int file_fd, char **cmd)
 			print_error(1);
 		if (dup2(pipefd[1], STDOUT_FILENO) == -1)
 			print_error(1);
-		if (execvp(cmd[0], cmd) == -1)
+		if (execve(cmd1[0], cmd1, NULL) == -1)
 			print_error(2);
 	}
 	else
@@ -84,7 +84,7 @@ void	check_child(int flag, int *pipefd,	int file_fd, char **cmd)
 			print_error(1);
 		if (dup2 (file_fd, STDOUT_FILENO) == -1)
 			print_error(1);
-		if (execvp(cmd[0], cmd) == -1)
+		if (execve(cmd1[0], cmd1, NULL) == -1)
 			print_error(2);
 	}
 }
