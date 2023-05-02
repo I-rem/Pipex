@@ -1,24 +1,29 @@
-NAME = pipex
+NAME        := pipex
+CC        := gcc
+FLAGS    := -Wall -Wextra -Werror 
 
-CC = gcc
+SRCS        :=      pipex.c pipex_utils.c
+                          
+OBJS        := $(SRCS:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror
+.c.o:
+	${CC} ${FLAGS} -c $< -o ${<:.c=.o}
 
-SRCS = pipex.c
+RM		    := rm -f
 
-OBJS = pipex.o
+${NAME}:	${OBJS}
+			${CC} ${FLAGS} -o ${NAME} ${OBJS}
 
-all: $(NAME)
+all:		${NAME}
 
-$(NAME):
-	$(CC) $(CFLAGS) $(SRCS) -o pipex 
+bonus:		all
 
 clean:
-	rm -rf $(OBJS)
+			@ ${RM} *.o
 
-fclean: clean
-	rm -f $(NAME)
+fclean:		clean
+			@ ${RM} ${NAME}
 
-re: fclean all
+re:			fclean all
 
-.PHONY: all clean fclean re
+.PHONY:		all clean fclean re
