@@ -96,7 +96,7 @@ void	print_error(int flag)
 	else if (flag == 1)
 		perror("dup2");
 	else if (flag == 2)
-		perror("execvp");;
+		perror("execvp");
 	ft_putstr_fd(strerror(errno), 2);
 	exit(EXIT_FAILURE);
 }
