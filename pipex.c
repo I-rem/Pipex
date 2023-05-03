@@ -6,7 +6,7 @@
 /*   By: ikayacio <ikayacio@student.42istanbul.com  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 13:50:05 by ikayacio          #+#    #+#             */
-/*   Updated: 2023/05/02 18:21:24 by ikayacio         ###   ########.fr       */
+/*   Updated: 2023/05/02 16:26:04 by ikayacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,38 +27,9 @@ pid_t	check_fork(pid_t pid)
 	if (pid == -1)
 	{
 		perror("fork");
-		print_error(4);
+		exit (EXIT_FAILURE);
 	}
 	return (pid);
-}
-
-char	*ft_strdup(const char *s1)
-{
-	char	*p;
-	int		len;
-
-	len = 0;
-	while (s1[len])
-		len++;
-	p = (char *) malloc(len + 1);
-	if (!p)
-		return (NULL);
-	len = 0;
-	while (s1[len] != '\0')
-	{
-		p[len] = s1[len];
-		len++;
-	}
-	p[len] = '\0';
-	return (p);
-}
-
-void	make_cmd(char **cmd, char *argv)
-{
-	cmd[0] = ft_strdup("/bin/sh");
-	cmd[1] = ft_strdup("-c");
-	cmd[2] = ft_strdup(argv);
-	cmd[3] = NULL;
 }
 
 int	main(int argc, char **argv)

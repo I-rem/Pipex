@@ -2,7 +2,7 @@ NAME        := pipex
 CC        := gcc
 FLAGS    := -Wall -Wextra -Werror 
 
-SRCS        :=      pipex.c pipex_utils.c
+SRCS        :=      pipex.c pipex_utils.c command_utils.c
                           
 OBJS        := $(SRCS:.c=.o)
 
