@@ -1,8 +1,8 @@
-NAME        := pipex
+NAME        := push_swap
 CC        := gcc
 FLAGS    := -Wall -Wextra -Werror 
 
-SRCS        :=      pipex.c pipex_utils.c command_utils.c
+SRCS        :=      list_utils.c push_swap_utils.c push_swap.c radix_utils.c sort_utils.c sorts.c
                           
 OBJS        := $(SRCS:.c=.o)
 
