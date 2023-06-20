@@ -18,9 +18,9 @@
 
 typedef struct s_list
 {
-	int				content;
-	int				checked;
-	struct s_list	*next;
+	long long			content;
+	int					checked;
+	struct s_list		*next;
 }	t_list;
 
 t_list	*ft_lstnew(int content);

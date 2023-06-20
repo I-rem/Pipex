@@ -16,6 +16,12 @@ int	is_sorted(t_list *lst)
 {
 	while (lst->next != NULL)
 	{
+		if (lst->content > 2147483647
+			|| lst->content < -2147483648) // Not sure if this will work
+		{
+			write(1, "Error\n", 6);
+			return (1);
+		}
 		if (lst->content > lst->next->content)
 			return (0);
 		lst = lst->next;
@@ -65,3 +71,27 @@ int	find_pos(t_list *lst, int num)
 	}
 	return (-1);
 }
+
+/*
+int	duplicate_check(char **argv)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (argv[++i] != NULL)
+	{
+		j = i + 1;
+		while (argv[j] != NULL)
+		{
+			if (ft_atoi(argv[i]) == ft_atoi(argv[j]))
+			{
+				write(1, "Error\n", 6);
+				return (1);
+			}
+			j++;
+		}
+	}
+	return (1);
+}
+*/

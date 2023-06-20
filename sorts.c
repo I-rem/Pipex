@@ -40,9 +40,9 @@ void	medium_sort(t_list **lst, t_list **lst_b)
 
 void	little_sort(t_list **lst, int argc, char mode)
 {
-	if (argc == 2)
+	if (argc == 2 && !is_sorted(*lst))
 		swap(lst, mode);
-	else if (argc == 3)
+	else if (argc == 3 && !is_sorted(*lst))
 	{
 		if ((*lst)->content > (*lst)->next->content
 			&& (*lst)->content > (*lst)->next->next->content)
